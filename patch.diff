@@ -1,0 +1,152 @@
+From 3eeda367f8d323fa7b14b42ce5774fae014a9f09 Mon Sep 17 00:00:00 2001
+From: Mahaldi Wijaya Saputra <mahaldi.saputra@indivaragroup.com>
+Date: Wed, 25 Nov 2020 10:16:05 +0700
+Subject: [PATCH] update
+
+---
+ exercises/fizzbuzz/index.js      | 11 ++++++++-
+ exercises/maxchar/index.js       | 38 +++++++++++++++++++++++++++++++-
+ exercises/palindrome/index.js    | 11 +++++++--
+ exercises/reverseint/index.js    | 12 ++++++++--
+ exercises/reversestring/index.js | 17 ++++++++++++--
+ 5 files changed, 81 insertions(+), 8 deletions(-)
+
+diff --git a/exercises/fizzbuzz/index.js b/exercises/fizzbuzz/index.js
+index 0aeab88..2b56670 100644
+--- a/exercises/fizzbuzz/index.js
++++ b/exercises/fizzbuzz/index.js
+@@ -12,6 +12,15 @@
+ //   4
+ //   buzz
+ 
+-function fizzBuzz(n) {}
++function fizzBuzz(n) {
++    for(let current = 1 ; current <= n ; current++) {
++        let printed = null
++        if (current % 3 === 0 && current % 5 === 0) printed = 'fizzbuzz'
++        else if(current % 5 === 0) printed = 'buzz'
++        else if(current % 3 === 0) printed = 'fizz'
++        else printed = current
++        console.log(printed)
++    }
++}
+ 
+ module.exports = fizzBuzz;
+diff --git a/exercises/maxchar/index.js b/exercises/maxchar/index.js
+index 12f32ba..1bf0d21 100644
+--- a/exercises/maxchar/index.js
++++ b/exercises/maxchar/index.js
+@@ -5,6 +5,42 @@
+ // maxChar("abcccccccd") === "c"
+ // maxChar("apple 1231111") === "1"
+ 
+-function maxChar(str) {}
++function maxChar(str) {
++    let charMap = {}
++    let max = 0
++    let charMax = ''
++    
++    for(let char of str) {
++        if(charMap[char]) charMap[char]++
++        else charMap[char] = 1
++    }
+ 
++    for(let char in charMap) {
++        if(charMap[char] > max) {
++            max = charMap[char]
++            charMax = char
++        }
++    }
++    return charMax
++}
++// function maxChar(str) {
++//     let objected = {}
++//     str.toString().split('').forEach((character) => {
++//         objected[character] = {
++//             char: character.toString(),
++//             total: 0
++//         }
++//     })
++//     str.toString().split('').forEach((character) => {
++//         if(character === objected[character].char) {
++//             objected[character].total += 1
++//         }
++//     })
++//     let totalTheMost = 0
++//     const entries = Object.entries(objected)
++//     for(const [char, value] of entries) {
++//         if(value.total > totalTheMost) totalTheMost = value.char
++//     }
++//     return totalTheMost
++// }
+ module.exports = maxChar;
+diff --git a/exercises/palindrome/index.js b/exercises/palindrome/index.js
+index 58115ed..7253435 100644
+--- a/exercises/palindrome/index.js
++++ b/exercises/palindrome/index.js
+@@ -7,6 +7,13 @@
+ //   palindrome("abba") === true
+ //   palindrome("abcdefg") === false
+ 
+-function palindrome(str) {}
+-
++// function palindrome(str) {
++//     return str.split('').every((character, i) => {
++//         return character === str[(str.length - 1) - i]
++//     })
++// }
++function palindrome(str) {
++    const reversed = str.split('').reverse().join('');
++    return reversed === str
++}
+ module.exports = palindrome;
+diff --git a/exercises/reverseint/index.js b/exercises/reverseint/index.js
+index 5db3bfd..2a137e4 100644
+--- a/exercises/reverseint/index.js
++++ b/exercises/reverseint/index.js
+@@ -8,6 +8,14 @@
+ //   reverseInt(-15) === -51
+ //   reverseInt(-90) === -9
+ 
+-function reverseInt(n) {}
+-
++function reverseInt(n) {
++    const reversed = parseInt(n.toString().split('').reverse().join(''))
++    return reversed * Math.sign(n) //sign untuk nentuin n itu negatif, positif atau zero, klo minus bakal di kali -1 berarti
++}
++// function reverseInt(n) {
++//     const reverse = () => {
++//         return parseInt(n.toString().split('').reverse().join(''))
++//     }
++//     return n < 0 ? -reverse() : reverse()
++// }
+ module.exports = reverseInt;
+diff --git a/exercises/reversestring/index.js b/exercises/reversestring/index.js
+index fc90903..efc5922 100644
+--- a/exercises/reversestring/index.js
++++ b/exercises/reversestring/index.js
+@@ -6,6 +6,19 @@
+ //   reverse('hello') === 'olleh'
+ //   reverse('Greetings!') === '!sgniteerG'
+ 
+-function reverse(str) {}
+-
++function reverse(str) {
++    return str.split('').reverse().join('');
++}
++// function reverse(str) {
++//     return str.reduce((reversed, character) => {
++//         reversed = character + reversed
++//     }, '')
++// }
++// function reverse(str) {
++//     let reversed = ''
++//     for(let character of str) {
++//         reversed = character + reversed
++//     }
++//     return reversed
++// }
+ module.exports = reverse;
+-- 
+2.23.0
+
